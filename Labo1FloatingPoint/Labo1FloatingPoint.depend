@@ -1,0 +1,52 @@
+# depslib dependency file v1.0
+1331067578 source:d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\main.cpp
+	<iostream>
+	"BigIntegerLibrary.hh"
+
+1330877635 source:d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\functions.cpp
+
+1331061380 source:d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\bigintegeralgorithms.cc
+	"BigIntegerAlgorithms.hh"
+
+1331061380 d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\bigintegeralgorithms.hh
+	"BigInteger.hh"
+
+1331061380 d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\biginteger.hh
+	"BigUnsigned.hh"
+
+1331061380 d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\bigunsigned.hh
+	"NumberlikeArray.hh"
+
+1331061380 d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\numberlikearray.hh
+
+1331061380 source:d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\bigintegerutils.cc
+	"BigIntegerUtils.hh"
+	"BigUnsignedInABase.hh"
+
+1331061380 d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\bigintegerutils.hh
+	"BigInteger.hh"
+	<string>
+	<iostream>
+
+1331061380 d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\bigunsignedinabase.hh
+	"NumberlikeArray.hh"
+	"BigUnsigned.hh"
+	<string>
+
+1331061380 source:d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\bigunsigned.cc
+	"BigUnsigned.hh"
+
+1331061380 source:d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\bigunsignedinabase.cc
+	"BigUnsignedInABase.hh"
+
+1331061380 source:d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\biginteger.cc
+	"BigInteger.hh"
+
+1331061380 d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\bigintegerlibrary.hh
+	"NumberlikeArray.hh"
+	"BigUnsigned.hh"
+	"BigInteger.hh"
+	"BigIntegerAlgorithms.hh"
+	"BigUnsignedInABase.hh"
+	"BigIntegerUtils.hh"
+
