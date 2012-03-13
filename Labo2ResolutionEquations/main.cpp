@@ -17,14 +17,13 @@
 *                                   Résolution d'equations
 *
 *	Description:
-*   Implémentation de la méthode de bisection de Bolzano
+*   Implémentation de la méthode de bisection de Bolzano et la méthode du point fixe
 *
 ********************************************************************************************/
 
 #include <math.h>
 #include <stdio.h>
 #include <iostream>
-#include <vector>
 
 #include "main.h"
 #include "GeomGlut.h"
@@ -38,7 +37,11 @@ extern GeomGlut graphWin;
  ******************************************************************************************/
 using namespace std;
 
-//#define USING_FIRST_FUNCTION
+/****************************************************
+*  Comment, uncomment here for different behaviour
+ ****************************************************/
+
+#define USING_FIRST_FUNCTION
 //#define USING_BISECTION
 
 const double LEFTLIMIT = -20;
@@ -46,9 +49,9 @@ const double RIGHTLIMIT = 20;
 const double MAXHEIGHT = 4.1;
 const double MINHEIGHT = -4.1;
 
-const double TEST_EPSILON = 0.02;
+const double TEST_EPSILON = 0.01;
 const double STARTING_POINT = 0.1;
-const double TEST_LAMBDA = 5.0;
+const double TEST_LAMBDA = 5.2;
 const int LOOP_LIMIT = 10000;
 
 /******************************************************************************************
@@ -72,10 +75,11 @@ void fixedPoint(double epsilon = TEST_EPSILON, double lambda = TEST_LAMBDA, doub
 /****************************************************
 *                  Helper functions
  ****************************************************/
+void plotCurrentFunction();
+bool oppositeSigns(double a, double b);
+
 double fixedPointLinearFunction(double x);
 double fixedPointAdapterFunction(double x, double lambda = TEST_LAMBDA);
-bool oppositeSigns(double a, double b);
-void plotCurrentFunction();
 void plotLinearFunction();
 void plotAdaptedFunction(double lambda = TEST_LAMBDA);
 
@@ -101,7 +105,7 @@ void mainFunction(void)
     cout << "Starting fixed point method ... " << endl;
     plotLinearFunction();
     plotAdaptedFunction();
-    fixedPoint(0.2, 5);
+    fixedPoint(0.01, 5.2);
     #endif
     cout << "___________________________________________________________________________" << endl;
 }
@@ -110,7 +114,7 @@ int main(int argc, char **argv)
 {
   graphWin.initGraphicsWin( 1000, LEFTLIMIT, RIGHTLIMIT, MINHEIGHT, MAXHEIGHT );
   mainFunction();
-  return( 0 );
+  return(0);
 }
 
 /******************************************************************************************
@@ -118,6 +122,9 @@ int main(int argc, char **argv)
 * 	 	 	 	 	 	 	 	 	 Function declarations
 *
  ******************************************************************************************/
+/****************************************************
+*        Mathematical functions for testing
+ ****************************************************/
 
 double f(double x)
 {
@@ -129,20 +136,9 @@ double g(double x)
     return x/(1-pow(x,2));
 }
 
-bool oppositeSigns(double a, double b)
-{
-    return (a == 0 && b > 0) || (a > 0 && b == 0) || ( a < 0 && b > 0) || (a > 0 && b < 0) || (a == 0 && b < 0) || (a < 0 && b == 0);
-}
-
-/*
-* Assumptions *
-b is larger than a
-epsilon is chosen so that it still gives correct value and is positive
-
-Note :
-Intervals may show up more times, we did not consider this as an error
-Ex 0 and an interval to the left and an interval to the right
-*/
+/****************************************************
+*                  Solving methods
+ ****************************************************/
 
 void bolzanoBisectionRecursive(double a, double b, double epsilon)
 {
@@ -188,6 +184,38 @@ void bolzanoBisectionRecursive(double a, double b, double epsilon)
     }
 }
 
+void fixedPoint(double epsilon, double lambda, double startingPoint)
+{
+    double previousPoint = startingPoint;
+    int loopCounter = 0;
+    while (fabs(fixedPointAdapterFunction(previousPoint) - previousPoint) > epsilon || loopCounter < LOOP_LIMIT)
+    {
+        previousPoint=fixedPointAdapterFunction(previousPoint, lambda);
+        graphWin.segment(previousPoint, fixedPointAdapterFunction(previousPoint, lambda), fixedPointAdapterFunction(previousPoint, lambda), fixedPointAdapterFunction(previousPoint, lambda));
+        graphWin.segment(previousPoint, previousPoint, previousPoint, fixedPointAdapterFunction(previousPoint, lambda));
+        loopCounter++;
+    }
+
+    #ifdef USING_FIRST_FUNCTION
+    if(f(previousPoint) <= epsilon)
+    #else
+    if(g(previousPoint) <= epsilon)
+    #endif
+    {
+        cout << "x = " << previousPoint << endl;
+    }
+    if(lambda > 0.0)
+    {
+        lambda -= 2.0;
+        fixedPoint(epsilon, lambda);
+    }
+}
+
+
+
+/****************************************************
+*                  Helper functions
+ ****************************************************/
 void plotCurrentFunction()
 {
     for(double i = LEFTLIMIT; i <= RIGHTLIMIT; i = i + 0.001)
@@ -198,6 +226,11 @@ void plotCurrentFunction()
         graphWin.plot(i,g(i),1);
         #endif
     }
+}
+
+bool oppositeSigns(double a, double b)
+{
+    return (a == 0 && b > 0) || (a > 0 && b == 0) || ( a < 0 && b > 0) || (a > 0 && b < 0) || (a == 0 && b < 0) || (a < 0 && b == 0);
 }
 
 double fixedPointLinearFunction(double x)
@@ -227,42 +260,5 @@ void plotAdaptedFunction(double lambda)
     for(double i =- LEFTLIMIT; i < RIGHTLIMIT; i += 0.01)
     {
         graphWin.plot(i, fixedPointAdapterFunction(i, lambda), 1);
-    }
-}
-
-void fixedPoint(double epsilon, double lambda, double startingPoint)
-{
-    double previousPoint = startingPoint;
-    int loopCounter = 0;
-    while (fabs(fixedPointAdapterFunction(previousPoint) - previousPoint) > epsilon || loopCounter < LOOP_LIMIT)
-    {
-        previousPoint=fixedPointAdapterFunction(previousPoint);
-        graphWin.segment(previousPoint, fixedPointAdapterFunction(previousPoint), fixedPointAdapterFunction(previousPoint), fixedPointAdapterFunction(previousPoint));
-        graphWin.segment(previousPoint, previousPoint, previousPoint, fixedPointAdapterFunction(previousPoint));
-        loopCounter++;
-    }
-
-    #ifdef USING_FIRST_FUNCTION
-    if(f(previousPoint) <= epsilon)
-    #else
-    if(g(previousPoint) <= epsilon)
-    #endif
-    {
-        cout << "x = " << previousPoint << endl;
-        #ifdef USING_FIRST_FUNCTION
-        //cout<<". Function gives value of  " << f(previousPoint) << " which is smaller than epsilon (" << epsilon << ")." <<  endl;
-        #else
-        //cout<<". Function gives value of  " << g(previousPoint) << " which is smaller than epsilon (" << epsilon << ")." <<  endl;
-        #endif
-    }
-    else
-    {
-        std::cout<<"Zero prob : "<<previousPoint<<std::endl;
-        //std::cout<<"Value : "<<g2(previousPoint)<<std::endl;
-    }
-    if(lambda > 0.0)
-    {
-        lambda -= 2;
-        fixedPoint(epsilon, lambda);
     }
 }
