@@ -1,3 +1,5 @@
+
+/*
 #include <iostream>
 #include "BigIntegerLibrary.hh"
 
@@ -64,13 +66,13 @@ int main()
     int normalisationMultiplier = 0;
     /******************************\
     |       Sign calculation       |
-    \******************************/
+    \******************************
 
     x[0] = ( inputF < 0 ) ? 1 : 0;
     cout << "x[0] est " << x[0] << endl;
     /******************************\
     |       Get Rid of float       |
-    \******************************/
+    \******************************
 
     while(!is_integer(inputF))
     {
@@ -84,7 +86,7 @@ int main()
     //cout << "input est " << input << endl;
     /******************************\
     |     Exponent calculation     |
-    \******************************/
+    \******************************
 
     int exponent = 0;
     BigInteger leftLimit = BigInteger(5) * pow(normalisationMultiplier - 1, 10);
@@ -129,11 +131,11 @@ int main()
 
     /******************************\
     |     Mantisse calculation     |
-    \******************************/
+    \******************************
 
     // x[14] -> x[99]
 
-/**** PROBLEME PAR ICI ****/
+/**** PROBLEME PAR ICI ****
 
     //input = input - BigInteger(5) * pow(normalisationMultiplier, 10) / BigInteger(10); // car c'est normalise
 
@@ -193,3 +195,4 @@ int main()
     return 0;
 
 }
+*/

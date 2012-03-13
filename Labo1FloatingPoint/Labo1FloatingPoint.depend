@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1331067578 source:d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\main.cpp
+1331077843 source:d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\main.cpp
 	<iostream>
 	"BigIntegerLibrary.hh"
 
@@ -49,4 +49,14 @@
 	"BigIntegerAlgorithms.hh"
 	"BigUnsignedInABase.hh"
 	"BigIntegerUtils.hh"
+
+1331078238 source:d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\main2.cpp
+	<iostream>
+	"include/MyFloat.h"
+
+1331077782 d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\include\myfloat.h
+	<iostream>
+
+1331078233 source:d:\exercices ecole\algorithmesnumeriques\labo1floatingpoint\src\myfloat.cpp
+	"../include/MyFloat.h"
 

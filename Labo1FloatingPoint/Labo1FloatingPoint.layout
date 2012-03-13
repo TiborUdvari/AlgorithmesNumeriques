@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
+	<File name="BigInteger.cc" open="1" top="0" tabpos="5">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="BigInteger.hh" open="1" top="0" tabpos="3">
+		<Cursor position="1628" topLine="47" />
+	</File>
+	<File name="BigIntegerLibrary.hh" open="1" top="0" tabpos="4">
+		<Cursor position="0" topLine="0" />
+	</File>
 	<File name="functions.cpp" open="1" top="0" tabpos="2">
 		<Cursor position="0" topLine="0" />
 	</File>
+	<File name="include\MyFloat.h" open="1" top="0" tabpos="7">
+		<Cursor position="59" topLine="0" />
+	</File>
 	<File name="main.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="1704" topLine="74" />
+		<Cursor position="3844" topLine="105" />
+	</File>
+	<File name="main2.cpp" open="1" top="0" tabpos="6">
+		<Cursor position="1196" topLine="10" />
+	</File>
+	<File name="src\MyFloat.cpp" open="1" top="0" tabpos="8">
+		<Cursor position="3110" topLine="117" />
 	</File>
 </CodeBlocks_layout_file>

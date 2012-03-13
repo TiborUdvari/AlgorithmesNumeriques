@@ -31,6 +31,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="BigInteger.cc" />
+		<Unit filename="BigInteger.hh" />
+		<Unit filename="BigIntegerAlgorithms.cc" />
+		<Unit filename="BigIntegerAlgorithms.hh" />
+		<Unit filename="BigIntegerLibrary.hh" />
+		<Unit filename="BigIntegerUtils.cc" />
+		<Unit filename="BigIntegerUtils.hh" />
+		<Unit filename="BigUnsigned.cc" />
+		<Unit filename="BigUnsigned.hh" />
+		<Unit filename="BigUnsignedInABase.cc" />
+		<Unit filename="BigUnsignedInABase.hh" />
+		<Unit filename="NumberlikeArray.hh" />
 		<Unit filename="functions.cpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
