@@ -11,7 +11,7 @@
 *
 *                                Haute Ecole Arc Ingénierie
 * 	 	 	 	 	 	 	 	 Année académique 2011-2012
-* 	 	 	 	 	 	 	 	 	 	 12 mars 2012
+* 	 	 	 	 	 	 	 	 	 	 13 mars 2012
 *
 * 	 	 	 	 	 	   Laboratoire 2 d'Algorithmes Numériques
 *                                   Résolution d'equations
@@ -44,8 +44,8 @@ using namespace std;
 #define USING_FIRST_FUNCTION
 //#define USING_BISECTION
 
-const double LEFTLIMIT = -20;
-const double RIGHTLIMIT = 20;
+const double LEFTLIMIT = -5.0;
+const double RIGHTLIMIT = 5.0;
 const double MAXHEIGHT = 4.1;
 const double MINHEIGHT = -4.1;
 
@@ -102,10 +102,15 @@ void mainFunction(void)
     bolzanoBisectionRecursive(LEFTLIMIT,RIGHTLIMIT,0.02);
 
     #else
+    double lambda = 2.0;
+
     cout << "Starting fixed point method ... " << endl;
+    //glColor3d(255,0,0);
+    plotCurrentFunction();
+    //glColor3f(0.0f,0.0f,0.0f);
     plotLinearFunction();
-    plotAdaptedFunction();
-    fixedPoint(0.01, 5.2);
+    plotAdaptedFunction(lambda);
+    fixedPoint(0.5, lambda, 0.1);
     #endif
     cout << "___________________________________________________________________________" << endl;
 }
@@ -204,11 +209,13 @@ void fixedPoint(double epsilon, double lambda, double startingPoint)
     {
         cout << "x = " << previousPoint << endl;
     }
+/*
     if(lambda > 0.0)
     {
         lambda -= 2.0;
         fixedPoint(epsilon, lambda);
     }
+*/
 }
 
 
@@ -218,7 +225,7 @@ void fixedPoint(double epsilon, double lambda, double startingPoint)
  ****************************************************/
 void plotCurrentFunction()
 {
-    for(double i = LEFTLIMIT; i <= RIGHTLIMIT; i = i + 0.001)
+    for(double i = LEFTLIMIT; i <= RIGHTLIMIT; i = i + 0.01)
     {
         #ifdef USING_FIRST_FUNCTION
         graphWin.plot(i,f(i),1);
@@ -230,6 +237,7 @@ void plotCurrentFunction()
 
 bool oppositeSigns(double a, double b)
 {
+    //FIXME HIGLY COMPLICATED
     return (a == 0 && b > 0) || (a > 0 && b == 0) || ( a < 0 && b > 0) || (a > 0 && b < 0) || (a == 0 && b < 0) || (a < 0 && b == 0);
 }
 
@@ -249,7 +257,8 @@ double fixedPointAdapterFunction(double x, double lambda)
 
 void plotLinearFunction()
 {
-    for(double i =- LEFTLIMIT; i < RIGHTLIMIT; i += 0.01)
+    // FIXME Optimise to segment
+    for(double i = LEFTLIMIT; i < RIGHTLIMIT; i += 0.01)
     {
         graphWin.plot(i, fixedPointLinearFunction(i), 1);
     }
@@ -257,7 +266,7 @@ void plotLinearFunction()
 
 void plotAdaptedFunction(double lambda)
 {
-    for(double i =- LEFTLIMIT; i < RIGHTLIMIT; i += 0.01)
+    for(double i = LEFTLIMIT; i < RIGHTLIMIT; i += 0.01)
     {
         graphWin.plot(i, fixedPointAdapterFunction(i, lambda), 1);
     }
