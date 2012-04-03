@@ -51,11 +51,11 @@ int main()
 //    matrixRes=matrix-matrix2;
 //    matrixRes.print();
 //    
-//    cout << "___________________________________________________________"<<endl;
-//    cout<<"mult by vec"<<endl;
-//    
-//    matrixRes=matrix*vector;
-//    matrixRes.print();
+    cout << "___________________________________________________________"<<endl;
+    cout<<"mult by vec"<<endl;
+    
+    matrixRes=matrix*vector;
+    matrixRes.print();
     
     /*------------------------------------------------------------------*\
     |*							Timer start     						*|

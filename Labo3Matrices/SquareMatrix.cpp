@@ -30,8 +30,8 @@ void SquareMatrix::fill()
         {-3.7, -0.5,  0.4,  0.9,  2.5, -0.1,  7.6, -3.7, -0.2,  4.4,  0.8,  3.7 },
         { 0.6,  0.0, -0.1, -2.3, -0.3, -4.7, -0.7,  0.8, -0.0,  0.3,  1.5,  1.4 },
         {-0.8, -0.2, -0.0,  0.0, -0.2,  0.0,  1.4,  2.9, -1.4,  0.6,  0.9, -0.1 }};
-    //double m[9]={-2,-1,2,2,1,0,-3,3,1};
-    double m[9]={-2,-1,2,2,1,4,-3,3,1};
+    double m[9]={-2,-1,2,2,1,0,-3,3,1};
+    //double m[3]={-2,-1,2,2,1,4,-3,3,1};
     srand(time(NULL));
     
     //    for (int i = 1; i <= n; ++i)
@@ -47,7 +47,7 @@ void SquareMatrix::fill()
     //	}
     for (int i=0; i<9; i++) 
     {
-        arrayElements[i]=m[i];
+        arrayElements[i]=m[i];    
     }
     
 }
@@ -62,9 +62,9 @@ double SquareMatrix::generateRandom(double leftLimit, double rightLimit)
 void SquareMatrix::print()
 {
 	std::cout.precision(2);
-	for (int i = 1; i <= n; i++)
+	for (int j = 1; j <= n; j++)
 	{
-		for (int j = 1; j <= n; j++)
+		for (int i = 1; i <= n; i++)
 		{
 			std::cout << std::fixed << arrayElements[index(i-1,j-1)] << "   ";
 		}
@@ -115,8 +115,8 @@ bool SquareMatrix::forwardEliminationLaurent()
         for (int j=0; j<i; j++) 
         {
             std::cout<<"i: "<<i<<" j: "<<j<<std::endl;
-            std::cout<<"i,i: "<<arrayElements[index(i, i)]<<" i,j: "<<arrayElements[index(j,i)];
-            double mult=arrayElements[index(i, i)]/arrayElements[index(j,i)];
+            std::cout<<"i,i: "<<arrayElements[index(i, i)]<<" i,j: "<<arrayElements[index(i,j)];
+            double mult=arrayElements[index(i,j)]/arrayElements[index(i, i)];
             std::cout<<" mult: "<<mult<<std::endl;
         }
     }
@@ -152,7 +152,6 @@ double SquareMatrix::getN() const
 
 SquareMatrix& SquareMatrix::operator+(const SquareMatrix& matrixToAdd) 
 {
-	// TODO Exception minimalist
 	try
 	{
 		if (!isCompatible(matrixToAdd))
@@ -187,7 +186,7 @@ SquareMatrix& SquareMatrix::operator*(const VectorND& vec)
         {
             for (int j=1; j<=n; j++) 
             {
-                matrixResult.arrayElements[index(i-1, j-1)]=arrayElements[index(i-1, j-1)]*vec.getArrayElements()[j];
+                matrixResult.arrayElements[index(i-1, j-1)]=arrayElements[index(i-1, j-1)]*vec.getArrayElements()[i-1];
             }
         }
         
@@ -221,7 +220,7 @@ SquareMatrix& SquareMatrix::operator-(const SquareMatrix& matrixToSubstract)
 	}
 }
 
-unsigned int SquareMatrix::index(int y,int x)//row major indexation, this is also the reason why the arguments are inverted, we do some row major indexation but the way we read the matrix is by column
+unsigned int SquareMatrix::index(int x,int y)//row major indexation, this is also the reason why the arguments are inverted, we do some row major indexation but the way we read the matrix is by column
 {
     return y*n+x;
 }
