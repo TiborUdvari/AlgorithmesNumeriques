@@ -1,25 +1,21 @@
 /********************************************************************************************
-* 	 	 	 	 	 	 	 	 	 	 Tibor Udvari
-* 	 	 	 	 	 	 	 	 Haute Ecole Arc Ingénierie
-* 	 	 	 	 	 	 	 	 Année académique 2011-2012
-* 	 	 	 	 	 	 	 	 	 	 26 mars 2012
-* 	 	 	 	 	 	  		 Labo algorithmes numériques
-*	Description:
-*   Square Matrix
-********************************************************************************************/
+ * 	 	 	 	 	 	 	 	 	 	 Tibor Udvari
+ * 	 	 	 	 	 	 	 	 Haute Ecole Arc IngÃ©nierie
+ * 	 	 	 	 	 	 	 	 AnnÃ©e acadÃ©mique 2011-2012
+ * 	 	 	 	 	 	 	 	 	 	 26 mars 2012
+ * 	 	 	 	 	 	  		 Labo algorithmes numÃ©riques
+ *	Description:
+ *   Square Matrix
+ ********************************************************************************************/
 
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <unistd.h>
 #include "SquareMatrix.h"
 
 using namespace std;
 
-void sleep(unsigned int mseconds)
-{
-    clock_t goal = mseconds + clock();
-    while (goal > clock());
-}
 
 /******************************************************************************************
  *
@@ -30,37 +26,28 @@ void sleep(unsigned int mseconds)
 int main()
 {
 	clock_t init, final;
-
-	init=clock();
-
-	/*------------------------------------------------------------------*\
-	|*							Timer start     						*|
-	\*------------------------------------------------------------------*/
-
-	SquareMatrix matrix(50);
-	matrix.print();
+    
+	    
+	SquareMatrix matrix(3);
 	cout << "___________________________________________________________"<<endl;
+    
+    /*------------------------------------------------------------------*\
+    |*							Timer start     						*|
+    \*------------------------------------------------------------------*/
 
-	//SquareMatrix matrixToAdd(50);
-	//matrixToAdd.print();
-	//cout << "___________________________________________________________"<<endl;
-
-	//SquareMatrix resultMatrix = matrix.additioner(matrixToAdd);
-	//resultMatrix.print();
-	cout << "Determinant est : " << matrix.getDeterminant();
-	cout << "___________________________________________________________"<<endl;
-	//sleep(100);
-
-	/*------------------------------------------------------------------*\
-	|*							Timer finish     						*|
-	\*------------------------------------------------------------------*/
-
-	final=clock()-init;
+    init=clock();
+    double det=matrix.getDeterminant();
+    final=clock()-init;
+    
+    /*------------------------------------------------------------------*\
+    |*							Timer finish     						*|
+    \*------------------------------------------------------------------*/
+    
+    cout << "Determinant est : " <<det<<endl;
 	cout.precision(10);
 	cout << "Temps d'execution : "<< (double)final / ((double)CLOCKS_PER_SEC) << endl;
+	cout << "___________________________________________________________"<<endl<<endl;
+    //matrix.print();
 
-	//matrix.forwardElimination();
-	//cout << matrix.getDeterminant();
-	//matrix.print();
 	return 0;
 }
