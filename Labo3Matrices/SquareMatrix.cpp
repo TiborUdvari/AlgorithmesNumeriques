@@ -6,7 +6,8 @@ SquareMatrix::SquareMatrix()
 
 SquareMatrix::SquareMatrix(unsigned int _n) : n(_n)
 {
-	arrayElements = new double[n*n];
+	B = new VectorND(n);
+    arrayElements = new double[n*n];
 	fill();
 }
 
@@ -30,6 +31,7 @@ void SquareMatrix::fill()
         {-3.7, -0.5,  0.4,  0.9,  2.5, -0.1,  7.6, -3.7, -0.2,  4.4,  0.8,  3.7 },
         { 0.6,  0.0, -0.1, -2.3, -0.3, -4.7, -0.7,  0.8, -0.0,  0.3,  1.5,  1.4 },
         {-0.8, -0.2, -0.0,  0.0, -0.2,  0.0,  1.4,  2.9, -1.4,  0.6,  0.9, -0.1 }};
+    
     double m[9]={-2,-1,2,2,1,0,-3,3,1};
     
     srand(time(NULL));
@@ -133,13 +135,10 @@ bool SquareMatrix::gaussElimination()
     print();
     std::cout<<std::endl;
     double *tabRes=new double[n];
-    tabRes[0]=arrayElements[index(0, 0)];
-    tabRes[1]=(1/arrayElements[index(1, 1)])-tabRes[0]*arrayElements[index(0, 1)];
-    tabRes[2]=(1/arrayElements[index(2, 2)])-tabRes[0]*arrayElements[index(0, 1)]-tabRes[1]*arrayElements[index(1, 2)];
     
     for(int i = 0;i < n;i++)
     {
-        tabRes[i]=1/arrayElements[index(i, i)];
+        tabRes[i]=B->getArrayElements()[i]/arrayElements[index(i, i)];
         for(int j=0;j<i;j++)
         {
             tabRes[i]-=arrayElements[index(j,i)];

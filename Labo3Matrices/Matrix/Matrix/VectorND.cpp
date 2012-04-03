@@ -26,10 +26,7 @@ void VectorND::fill()
 {
     for (int i=1; i<=dim; i++)
     {
-        if(i==1)
-            arrayElements[i-1]=2;//TODO random
-        else
-            arrayElements[i-1]=0;
+        arrayElements[i-1]=2;//TODO random
     }
 }
 

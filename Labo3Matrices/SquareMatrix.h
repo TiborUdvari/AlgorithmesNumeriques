@@ -35,6 +35,7 @@ private:
     unsigned int index(int x,int y);//2D matrix index to row major conversion
     bool isCompatible(const SquareMatrix& matrixToCompare) const;
     bool isCompatible(const VectorND& vec) const;
+    VectorND* B;
 };
 
 #endif /* SQUAREMATRIX_H_ */
