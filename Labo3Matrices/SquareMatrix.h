@@ -20,6 +20,7 @@ public:
 	void forwardElimination(int iEntry, int jEntry);
 	bool forwardElimination();
     bool forwardEliminationLaurent();
+    bool gaussElimination();//shows solution in console
 	double getDeterminant();
 	double getN() const;
 	SquareMatrix& operator+(const SquareMatrix& matrixToAdd);

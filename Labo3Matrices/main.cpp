@@ -34,12 +34,12 @@ int main()
     VectorND vector=VectorND(3);
     cout << "___________________________________________________________"<<endl;
     matrix.print();
-    cout << "___________________________________________________________"<<endl;
-    vector.print();
+//    cout << "___________________________________________________________"<<endl;
+//    vector.print();
 
-    matrix.forwardEliminationLaurent();
-    matrix.print();
-    
+    //matrix.forwardEliminationLaurent();//TODO make private
+    //matrix.print();
+    cout<<"det: "<<matrix.getDeterminant()<<endl;
     
 //	cout << "___________________________________________________________"<<endl;
 //    cout<<"add"<<endl;
@@ -51,11 +51,11 @@ int main()
 //    matrixRes=matrix-matrix2;
 //    matrixRes.print();
 //    
-    cout << "___________________________________________________________"<<endl;
-    cout<<"mult by vec"<<endl;
-    
-    matrixRes=matrix*vector;
-    matrixRes.print();
+//    cout << "___________________________________________________________"<<endl;
+//    cout<<"mult by vec"<<endl;
+//    
+//    matrixRes=matrix*vector;
+//    matrixRes.print();
     
     /*------------------------------------------------------------------*\
     |*							Timer start     						*|

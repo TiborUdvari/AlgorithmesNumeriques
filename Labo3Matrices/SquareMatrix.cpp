@@ -31,20 +31,20 @@ void SquareMatrix::fill()
         { 0.6,  0.0, -0.1, -2.3, -0.3, -4.7, -0.7,  0.8, -0.0,  0.3,  1.5,  1.4 },
         {-0.8, -0.2, -0.0,  0.0, -0.2,  0.0,  1.4,  2.9, -1.4,  0.6,  0.9, -0.1 }};
     double m[9]={-2,-1,2,2,1,0,-3,3,1};
-    //double m[3]={-2,-1,2,2,1,4,-3,3,1};
+    //double m[9]={-2,-1,2,2,1,4,-3,3,1};
     srand(time(NULL));
     
     //    for (int i = 1; i <= n; ++i)
-    //	{
-    //		for (int j = 1; j <= n; ++j)
-    //		{
-    //			arrayElements[index(i-1, j-1)] = generateRandom(0.9, 1.1);
+    //    {
+    //        for (int j = 1; j <= n; ++j)
+    //        {
+    //   			arrayElements[index(i-1, j-1)] = generateRandom(0.9, 1.1);
     //            //myArray[i-1][j-1];
     //            //generateRandom(-50, 50);
     //            //myArray[i-1][j-1];
     //            //generateRandom(10, 99);
-    //		}
-    //	}
+    //  		}
+    //  	}
     for (int i=0; i<9; i++) 
     {
         arrayElements[i]=m[i];    
@@ -114,25 +114,34 @@ bool SquareMatrix::forwardEliminationLaurent()
     {
         for (int j=0; j<i; j++) 
         {
-            std::cout<<"i: "<<i<<" j: "<<j<<std::endl;
-            std::cout<<"i,i: "<<arrayElements[index(i, i)]<<" i,j: "<<arrayElements[index(i,j)];
             double mult=arrayElements[index(i,j)]/arrayElements[index(i, i)];
-            std::cout<<" mult: "<<mult<<std::endl;
+            
+            for (int m=0; m<n; m++) 
+            {
+                arrayElements[index(m, j)]=arrayElements[index(m, j)]-mult*arrayElements[index(m, i)];
+            }
         }
     }
     return true;
 }
 
+bool SquareMatrix::gaussElimination()
+{
+    forwardEliminationLaurent();
+    for (int i=0; i<n; i++)
+    {
+        
+    }
+}
 double SquareMatrix::getDeterminant()
 {
-	forwardElimination();
+	forwardEliminationLaurent();//TODO rename
     
 	double determinant = 1;
-	for (int i = 1; i <= n*n; ++i)
+	for (int i = 1; i <= n; ++i)
 	{
 		determinant *= arrayElements[index(i-1, i-1)];
 	}
-    print();
 	return determinant;
 }
 
