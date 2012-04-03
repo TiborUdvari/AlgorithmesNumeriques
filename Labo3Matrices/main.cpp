@@ -39,12 +39,6 @@ int main()
     cout<<"Vector"<<endl;
     vector.print();
     cout << "___________________________________________________________"<<endl;
-    cout<<"det: "<<matrix.getDeterminant()<<endl;
-    cout << "___________________________________________________________"<<endl;
-    cout<<"Gauss"<<endl;
-    cout<<"Matrix after forward elimination and solutions"<<endl;
-    matrix.gaussElimination();
-	cout << "___________________________________________________________"<<endl;
     cout<<"add"<<endl;
     matrixRes=matrix+matrix2;
     matrixRes.print();
@@ -59,6 +53,12 @@ int main()
     
     matrixRes=matrix*vector;
     matrixRes.print();
+    cout << "___________________________________________________________"<<endl;
+    cout<<"det: "<<matrix.getDeterminant()<<endl;
+    cout << "___________________________________________________________"<<endl;
+    cout<<"Gauss"<<endl;
+    cout<<"Matrix after forward elimination and solutions"<<endl;
+    matrix.gaussElimination();
     
     /*------------------------------------------------------------------*\
     |*							Timer start     						*|

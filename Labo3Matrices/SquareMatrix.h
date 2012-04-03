@@ -17,9 +17,7 @@ public:
 	SquareMatrix(unsigned int _n);
 	virtual ~SquareMatrix();
 	void print();
-	void forwardElimination(int iEntry, int jEntry);
 	bool forwardElimination();
-    bool forwardEliminationLaurent();
     bool gaussElimination();//shows solution in console
 	double getDeterminant();
 	double getN() const;

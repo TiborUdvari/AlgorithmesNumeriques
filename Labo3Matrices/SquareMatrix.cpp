@@ -18,36 +18,8 @@ SquareMatrix::~SquareMatrix()
 
 void SquareMatrix::fill()
 {
-    double myArray[MAX_MY_ARRAY][MAX_MY_ARRAY] =
-    {{-1.0,  1.0, -2.0, -0.0,  0.9,  0.1,  0.5,  0.3, -0.5,  0.9, -0.5,  0.2 },
-        { 2.0,  1.0, -0.7,  0.6, -0.5,  4.3,  0.7,  0.8,  0.4,  0.1, -0.6, -1.2 },
-        { 0.0,  3.0, -1.0, -2.8,  0.1,  0.3, -1.0, -0.5,  0.1,  1.3,  0.7,  0.1 },
-        { 0.0,  0.3, -1.8,  0.7, -0.6, -0.4, -0.5,  0.1, -0.1, -0.4,  0.0, -0.0 },
-        { 2.0,  2.9,  0.9,  0.0,  1.0,  0.9,  0.7, -0.6,  4.0, -0.6, -1.7, -0.2 },
-        {-0.8, -0.2, -0.1,  0.8, -1.2,  0.0,  1.4,  2.9, -1.4,  0.6,  0.9, -0.1 },
-        {-1.0,  0.4,  1.7, -3.9,  1.4, -3.0, -0.6,  1.2,  0.3,  1.7,  0.0,  0.9 },
-        { 0.8,  1.4,  1.6,  0.8, -1.1,  1.7, -0.3, -0.7, -0.9,  1.1, -2.5,  0.8 },
-        { 1.8, -0.9, -3.3,  0.6, -4.2, -0.8, -0.8, -7.6,  1.3,  0.6,  1.8, -0.1 },
-        {-3.7, -0.5,  0.4,  0.9,  2.5, -0.1,  7.6, -3.7, -0.2,  4.4,  0.8,  3.7 },
-        { 0.6,  0.0, -0.1, -2.3, -0.3, -4.7, -0.7,  0.8, -0.0,  0.3,  1.5,  1.4 },
-        {-0.8, -0.2, -0.0,  0.0, -0.2,  0.0,  1.4,  2.9, -1.4,  0.6,  0.9, -0.1 }};
+    double m[9]={-2,-1,2,2,1,0,-3,3,1};//matrix given in class
     
-    double m[9]={-2,-1,2,2,1,0,-3,3,1};
-    
-    srand(time(NULL));
-    
-//    for (int i = 1; i <= n; ++i)
-//    {
-//        for (int j = 1; j <= n; ++j)
-//        {
-//            arrayElements[index(i-1, j-1)] = myArray[i-1][j-1];
-//            ////generateRandom(0.9, 1.1);
-//            //myArray[i-1][j-1];
-//            //generateRandom(-50, 50);
-//            //myArray[i-1][j-1];
-//            //generateRandom(10, 99);
-//        }
-//    }
     for (int i=0; i<9; i++) 
     {
         arrayElements[i]=m[i];    
@@ -75,43 +47,7 @@ void SquareMatrix::print()
 	}
 }
 
-void SquareMatrix::forwardElimination(int iEntry, int jEntry)
-{
-	double multiplier = arrayElements[index(iEntry - 1,jEntry - 1)] / arrayElements[index(jEntry - 1,jEntry - 1)];
-    int j=iEntry;
-    arrayElements[index(iEntry - 1,j - 1)] = arrayElements[index(iEntry - 1,j - 1)] - multiplier * arrayElements[index(jEntry - 1,j - 1)];
-    
-}
-
-double SquareMatrix::getLMatrixDiagonalElement(int iEntry, int jEntry)
-{
-	//TODO
-}
-
-bool SquareMatrix::forwardElimination()//FIXME 
-{
-	int i = 2;
-	int j = 1;
-    
-	while (i <= n)
-	{
-		while (j < i)
-		{
-			//std::cout << "Forward elimination for : " << i << "," << j<< std::endl;
-			if(arrayElements[index(j-1,j-1)]==0)
-            {
-                return false;
-            }
-            forwardElimination(i, j);
-			j++;
-		}
-		i++;
-		j = 1;
-	}
-    return true;
-}
-
-bool SquareMatrix::forwardEliminationLaurent()
+bool SquareMatrix::forwardElimination()
 {
     for (int i=n-1; i>0; i--) 
     {
@@ -130,7 +66,7 @@ bool SquareMatrix::forwardEliminationLaurent()
 
 bool SquareMatrix::gaussElimination()
 {
-    forwardEliminationLaurent();
+    forwardElimination();
     std::cout<<std::endl;
     print();
     std::cout<<std::endl;
@@ -138,6 +74,10 @@ bool SquareMatrix::gaussElimination()
     
     for(int i = 0;i < n;i++)
     {
+        if(arrayElements[index(i, i)]==0)
+        {
+            return false;
+        }
         tabRes[i]=B->getArrayElements()[i]/arrayElements[index(i, i)];
         for(int j=0;j<i;j++)
         {
@@ -155,7 +95,7 @@ bool SquareMatrix::gaussElimination()
 
 double SquareMatrix::getDeterminant()
 {
-	forwardEliminationLaurent();//TODO rename
+	forwardElimination();
     
 	double determinant = 1;
 	for (int i = 1; i <= n; ++i)
@@ -249,7 +189,7 @@ SquareMatrix& SquareMatrix::operator-(const SquareMatrix& matrixToSubstract)
 	}
 }
 
-unsigned int SquareMatrix::index(int x,int y)//row major indexation, this is also the reason why the arguments are inverted, we do some row major indexation but the way we read the matrix is by column
+unsigned int SquareMatrix::index(int x,int y)//row major indexation
 {
     return y*n+x;
 }
