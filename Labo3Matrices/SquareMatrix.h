@@ -19,6 +19,7 @@ public:
 	void print();
 	void forwardElimination(int iEntry, int jEntry);
 	bool forwardElimination();
+    bool forwardEliminationLaurent();
 	double getDeterminant();
 	double getN() const;
 	SquareMatrix& operator+(const SquareMatrix& matrixToAdd);

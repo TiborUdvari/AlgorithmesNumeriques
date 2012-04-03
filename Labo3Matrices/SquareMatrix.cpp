@@ -30,7 +30,8 @@ void SquareMatrix::fill()
         {-3.7, -0.5,  0.4,  0.9,  2.5, -0.1,  7.6, -3.7, -0.2,  4.4,  0.8,  3.7 },
         { 0.6,  0.0, -0.1, -2.3, -0.3, -4.7, -0.7,  0.8, -0.0,  0.3,  1.5,  1.4 },
         {-0.8, -0.2, -0.0,  0.0, -0.2,  0.0,  1.4,  2.9, -1.4,  0.6,  0.9, -0.1 }};
-    double m[9]={-2,-1,2,2,1,0,-3,3,1};
+    //double m[9]={-2,-1,2,2,1,0,-3,3,1};
+    double m[9]={-2,-1,2,2,1,4,-3,3,1};
     srand(time(NULL));
     
     //    for (int i = 1; i <= n; ++i)
@@ -104,6 +105,21 @@ bool SquareMatrix::forwardElimination()//FIXME
 		i++;
 		j = 1;
 	}
+    return true;
+}
+
+bool SquareMatrix::forwardEliminationLaurent()
+{
+    for (int i=n-1; i>0; i--) 
+    {
+        for (int j=0; j<i; j++) 
+        {
+            std::cout<<"i: "<<i<<" j: "<<j<<std::endl;
+            std::cout<<"i,i: "<<arrayElements[index(i, i)]<<" i,j: "<<arrayElements[index(j,i)];
+            double mult=arrayElements[index(i, i)]/arrayElements[index(j,i)];
+            std::cout<<" mult: "<<mult<<std::endl;
+        }
+    }
     return true;
 }
 
@@ -205,7 +221,7 @@ SquareMatrix& SquareMatrix::operator-(const SquareMatrix& matrixToSubstract)
 	}
 }
 
-unsigned int SquareMatrix::index(int x,int y)//row major indexation
+unsigned int SquareMatrix::index(int y,int x)//row major indexation, this is also the reason why the arguments are inverted, we do some row major indexation but the way we read the matrix is by column
 {
     return y*n+x;
 }

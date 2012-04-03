@@ -36,21 +36,26 @@ int main()
     matrix.print();
     cout << "___________________________________________________________"<<endl;
     vector.print();
-	cout << "___________________________________________________________"<<endl;
-    cout<<"add"<<endl;
-    matrixRes=matrix+matrix2;
-    matrixRes.print();
-    cout << "___________________________________________________________"<<endl;
+
+    matrix.forwardEliminationLaurent();
+    matrix.print();
     
-    cout <<"sub"<<endl;
-    matrixRes=matrix-matrix2;
-    matrixRes.print();
     
-    cout << "___________________________________________________________"<<endl;
-    cout<<"mult by vec"<<endl;
-    
-    matrixRes=matrix*vector;
-    matrixRes.print();
+//	cout << "___________________________________________________________"<<endl;
+//    cout<<"add"<<endl;
+//    matrixRes=matrix+matrix2;
+//    matrixRes.print();
+//    cout << "___________________________________________________________"<<endl;
+//    
+//    cout <<"sub"<<endl;
+//    matrixRes=matrix-matrix2;
+//    matrixRes.print();
+//    
+//    cout << "___________________________________________________________"<<endl;
+//    cout<<"mult by vec"<<endl;
+//    
+//    matrixRes=matrix*vector;
+//    matrixRes.print();
     
     /*------------------------------------------------------------------*\
     |*							Timer start     						*|
