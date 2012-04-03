@@ -4,6 +4,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
+#include "VectorND.h"
 /**
  *The Matrix is structured in 1D tab (row major order)
  *[ line1 | line2 | line3 |...]
@@ -19,10 +20,10 @@ public:
 	void forwardElimination(int iEntry, int jEntry);
 	bool forwardElimination();
 	double getDeterminant();
-	bool isCompatible(SquareMatrix& matrixToCompare);
-	double getN();
-	SquareMatrix& additioner(SquareMatrix& matrixToAdd);
-	SquareMatrix& substract(SquareMatrix& matrixToSubstract);
+	double getN() const;
+	SquareMatrix& operator+(const SquareMatrix& matrixToAdd);
+	SquareMatrix& operator-(const SquareMatrix& matrixToSubstract);
+    SquareMatrix& operator*(const VectorND& vec);
 	double getLMatrixDiagonalElement(int iEntry, int jEntry);
 private:
 	unsigned int n;
@@ -30,8 +31,8 @@ private:
 	void fill();
 	double generateRandom(double leftLimit, double rightLimit);
     unsigned int index(int x,int y);//2D matrix index to row major conversion
-    
-    
+    bool isCompatible(const SquareMatrix& matrixToCompare) const;
+    bool isCompatible(const VectorND& vec) const;
 };
 
 #endif /* SQUAREMATRIX_H_ */

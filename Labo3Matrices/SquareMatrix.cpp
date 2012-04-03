@@ -12,7 +12,7 @@ SquareMatrix::SquareMatrix(unsigned int _n) : n(_n)
 
 SquareMatrix::~SquareMatrix()
 {
-	delete[] arrayElements;
+	//delete[] arrayElements;//FIXME makes execution error
 }
 
 void SquareMatrix::fill()
@@ -32,22 +32,23 @@ void SquareMatrix::fill()
         {-0.8, -0.2, -0.0,  0.0, -0.2,  0.0,  1.4,  2.9, -1.4,  0.6,  0.9, -0.1 }};
     double m[9]={-2,-1,2,2,1,0,-3,3,1};
     srand(time(NULL));
-
-//    for (int i = 1; i <= n; ++i)
-//	{
-//		for (int j = 1; j <= n; ++j)
-//		{
-//			arrayElements[index(i-1, j-1)] = generateRandom(0.9, 1.1);
-//            //myArray[i-1][j-1];
-//            //generateRandom(-50, 50);
-//            //myArray[i-1][j-1];
-//            //generateRandom(10, 99);
-//		}
-//	}
-    for (int i=0; i<9; i++) {
+    
+    //    for (int i = 1; i <= n; ++i)
+    //	{
+    //		for (int j = 1; j <= n; ++j)
+    //		{
+    //			arrayElements[index(i-1, j-1)] = generateRandom(0.9, 1.1);
+    //            //myArray[i-1][j-1];
+    //            //generateRandom(-50, 50);
+    //            //myArray[i-1][j-1];
+    //            //generateRandom(10, 99);
+    //		}
+    //	}
+    for (int i=0; i<9; i++) 
+    {
         arrayElements[i]=m[i];
     }
-
+    
 }
 
 double SquareMatrix::generateRandom(double leftLimit, double rightLimit)
@@ -75,7 +76,7 @@ void SquareMatrix::forwardElimination(int iEntry, int jEntry)
 	double multiplier = arrayElements[index(iEntry - 1,jEntry - 1)] / arrayElements[index(jEntry - 1,jEntry - 1)];
     int j=iEntry;
     arrayElements[index(iEntry - 1,j - 1)] = arrayElements[index(iEntry - 1,j - 1)] - multiplier * arrayElements[index(jEntry - 1,j - 1)];
-
+    
 }
 
 double SquareMatrix::getLMatrixDiagonalElement(int iEntry, int jEntry)
@@ -83,7 +84,7 @@ double SquareMatrix::getLMatrixDiagonalElement(int iEntry, int jEntry)
 	//TODO
 }
 
-bool SquareMatrix::forwardElimination()
+bool SquareMatrix::forwardElimination()//FIXME 
 {
 	int i = 2;
 	int j = 1;
@@ -109,9 +110,9 @@ bool SquareMatrix::forwardElimination()
 double SquareMatrix::getDeterminant()
 {
 	forwardElimination();
-
+    
 	double determinant = 1;
-	for (int i = 1; i <= n; ++i)
+	for (int i = 1; i <= n*n; ++i)
 	{
 		determinant *= arrayElements[index(i-1, i-1)];
 	}
@@ -119,17 +120,21 @@ double SquareMatrix::getDeterminant()
 	return determinant;
 }
 
-bool SquareMatrix::isCompatible(SquareMatrix& matrixToCompare)
+bool SquareMatrix::isCompatible(const SquareMatrix& matrixToCompare) const
 {
 	return n == matrixToCompare.getN();
 }
 
-double SquareMatrix::getN()
+bool SquareMatrix::isCompatible(const VectorND &vec) const
+{
+    return n==vec.getDim();
+}
+double SquareMatrix::getN() const
 {
 	return n;
 }
 
-SquareMatrix& SquareMatrix::additioner(SquareMatrix& matrixToAdd)
+SquareMatrix& SquareMatrix::operator+(const SquareMatrix& matrixToAdd) 
 {
 	// TODO Exception minimalist
 	try
@@ -138,39 +143,64 @@ SquareMatrix& SquareMatrix::additioner(SquareMatrix& matrixToAdd)
 		{
 			throw 20;
 		}
-		SquareMatrix* matrixResult = new SquareMatrix(n);
-		for (int i = 1; i <= n; i++)
+		SquareMatrix matrixResult(n);
+		for (int i = 1; i <= n*n; i++)
 		{
-			matrixResult->arrayElements[i-1]=matrixToAdd.arrayElements[i-1]+this->arrayElements[i-1];
+			matrixResult.arrayElements[i-1]=matrixToAdd.arrayElements[i-1]+this->arrayElements[i-1];
 		}
-		return *matrixResult;
+		return matrixResult;
         
 	} catch (int e)
 	{
-		std::cout << "Your matrices are not compatible. Killing program ... "
-        << std::endl;
+		std::cout << "Error: "<<e<<"Your matrices are not compatible for addition. Killing program ... " << std::endl;
 		exit(1);
 	}
 }
 
-SquareMatrix& SquareMatrix::substract(SquareMatrix& matrixToSubstract)
+SquareMatrix& SquareMatrix::operator*(const VectorND& vec)
+{
+    try
+    {
+        if (!isCompatible(vec)) 
+        {
+            throw 21;
+        }
+        SquareMatrix matrixResult(n);
+        
+        for (int i=1;i<=n; i++)
+        {
+            for (int j=1; j<=n; j++) 
+            {
+                matrixResult.arrayElements[index(i-1, j-1)]=arrayElements[index(i-1, j-1)]*vec.getArrayElements()[j];
+            }
+        }
+        
+        return matrixResult;
+    }
+    catch(int e)
+    {
+        std::cout << "Error: "<<e<<"Your matrices and vector is not compatible for multiplication. Killing program ... " << std::endl;
+		exit(1);
+    }
+}
+SquareMatrix& SquareMatrix::operator-(const SquareMatrix& matrixToSubstract) 
 {
 	try
 	{
 		if (!isCompatible(matrixToSubstract))
 		{
-			throw 20;
+			throw 22;
 		}
         
-		SquareMatrix* matrixResult = new SquareMatrix(n);
-		for (int i = 1; i <= n; i++)
+		SquareMatrix matrixResult(n);
+		for (int i = 1; i <= n*n; i++)
 		{
-            //TODO
+            matrixResult.arrayElements[i-1]=this->arrayElements[i-1]-matrixToSubstract.arrayElements[i-1];
 		}
-		return *matrixResult;
+		return matrixResult;
 	} catch (int e)
 	{
-		std::cout << "Your matrices are not compatible for substraction. Killing program ... " << std::endl;
+		std::cout << "Error: "<<e<<"Your matrices are not compatible for substraction. Killing program ... " << std::endl;
 		exit(1);
 	}
 }
