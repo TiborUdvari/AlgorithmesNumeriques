@@ -31,20 +31,21 @@ void SquareMatrix::fill()
         { 0.6,  0.0, -0.1, -2.3, -0.3, -4.7, -0.7,  0.8, -0.0,  0.3,  1.5,  1.4 },
         {-0.8, -0.2, -0.0,  0.0, -0.2,  0.0,  1.4,  2.9, -1.4,  0.6,  0.9, -0.1 }};
     double m[9]={-2,-1,2,2,1,0,-3,3,1};
-    //double m[9]={-2,-1,2,2,1,4,-3,3,1};
+    
     srand(time(NULL));
     
-    //    for (int i = 1; i <= n; ++i)
-    //    {
-    //        for (int j = 1; j <= n; ++j)
-    //        {
-    //   			arrayElements[index(i-1, j-1)] = generateRandom(0.9, 1.1);
-    //            //myArray[i-1][j-1];
-    //            //generateRandom(-50, 50);
-    //            //myArray[i-1][j-1];
-    //            //generateRandom(10, 99);
-    //  		}
-    //  	}
+//    for (int i = 1; i <= n; ++i)
+//    {
+//        for (int j = 1; j <= n; ++j)
+//        {
+//            arrayElements[index(i-1, j-1)] = myArray[i-1][j-1];
+//            ////generateRandom(0.9, 1.1);
+//            //myArray[i-1][j-1];
+//            //generateRandom(-50, 50);
+//            //myArray[i-1][j-1];
+//            //generateRandom(10, 99);
+//        }
+//    }
     for (int i=0; i<9; i++) 
     {
         arrayElements[i]=m[i];    
@@ -128,11 +129,31 @@ bool SquareMatrix::forwardEliminationLaurent()
 bool SquareMatrix::gaussElimination()
 {
     forwardEliminationLaurent();
-    for (int i=0; i<n; i++)
+    std::cout<<std::endl;
+    print();
+    std::cout<<std::endl;
+    double *tabRes=new double[n];
+    tabRes[0]=arrayElements[index(0, 0)];
+    tabRes[1]=(1/arrayElements[index(1, 1)])-tabRes[0]*arrayElements[index(0, 1)];
+    tabRes[2]=(1/arrayElements[index(2, 2)])-tabRes[0]*arrayElements[index(0, 1)]-tabRes[1]*arrayElements[index(1, 2)];
+    
+    for(int i = 0;i < n;i++)
     {
-        
+        tabRes[i]=1/arrayElements[index(i, i)];
+        for(int j=0;j<i;j++)
+        {
+            tabRes[i]-=arrayElements[index(j,i)];
+        }
     }
+    
+    for (int i=0; i<n; i++) 
+    {
+        std::cout<<"x"<<i<<" = "<<tabRes[i]<<std::endl;
+    }
+    
+    return true;
 }
+
 double SquareMatrix::getDeterminant()
 {
 	forwardEliminationLaurent();//TODO rename

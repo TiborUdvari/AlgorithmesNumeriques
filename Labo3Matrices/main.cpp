@@ -33,29 +33,32 @@ int main()
     SquareMatrix matrixRes=SquareMatrix(3);
     VectorND vector=VectorND(3);
     cout << "___________________________________________________________"<<endl;
+    cout<<"Matrix"<<endl;
     matrix.print();
-//    cout << "___________________________________________________________"<<endl;
-//    vector.print();
-
-    //matrix.forwardEliminationLaurent();//TODO make private
-    //matrix.print();
+    cout << "___________________________________________________________"<<endl;
+    cout<<"Vector"<<endl;
+    vector.print();
+    cout << "___________________________________________________________"<<endl;
     cout<<"det: "<<matrix.getDeterminant()<<endl;
+    cout << "___________________________________________________________"<<endl;
+    cout<<"Gauss"<<endl;
+    cout<<"Matrix after forward elimination and solutions"<<endl;
+    matrix.gaussElimination();
+	cout << "___________________________________________________________"<<endl;
+    cout<<"add"<<endl;
+    matrixRes=matrix+matrix2;
+    matrixRes.print();
+    cout << "___________________________________________________________"<<endl;
     
-//	cout << "___________________________________________________________"<<endl;
-//    cout<<"add"<<endl;
-//    matrixRes=matrix+matrix2;
-//    matrixRes.print();
-//    cout << "___________________________________________________________"<<endl;
-//    
-//    cout <<"sub"<<endl;
-//    matrixRes=matrix-matrix2;
-//    matrixRes.print();
-//    
-//    cout << "___________________________________________________________"<<endl;
-//    cout<<"mult by vec"<<endl;
-//    
-//    matrixRes=matrix*vector;
-//    matrixRes.print();
+    cout <<"sub"<<endl;
+    matrixRes=matrix-matrix2;
+    matrixRes.print();
+    
+    cout << "___________________________________________________________"<<endl;
+    cout<<"mult by vec"<<endl;
+    
+    matrixRes=matrix*vector;
+    matrixRes.print();
     
     /*------------------------------------------------------------------*\
     |*							Timer start     						*|
