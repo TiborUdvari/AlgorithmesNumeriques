@@ -25,6 +25,21 @@ using namespace std;
 
 int main()
 {
+	double elements[] = {-2,-1,2,2,1,0,-3,3,1};
+	SquareMatrix* testMatrix = new SquareMatrix(3,0);
+
+	//double elements[] = {2,-1,2,-4,6,3,-4,-2,8};
+	//SquareMatrix* testMatrix = new SquareMatrix(3,0);
+
+	//double elements[] = {2,1,-1,3,-2,2,6,-4,4,14,19,4,6,0,-6,12};
+	//SquareMatrix* testMatrix = new SquareMatrix(4,0);
+
+	testMatrix->fillWithArray(elements);
+	testMatrix->print();
+	//testMatrix->doolittleLUdecomposition();
+	cout << testMatrix->getDeterminant();
+
+	/*
 	clock_t init, final;
     
 	    
