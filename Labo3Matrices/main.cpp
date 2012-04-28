@@ -25,7 +25,7 @@ using namespace std;
 
 int main()
 {
-	clock_t init, final;
+	//clock_t init, final;
     
 	    
 	SquareMatrix matrix=SquareMatrix(3);

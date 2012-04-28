@@ -476,3 +476,18 @@ void plotSecondDegreeDerivatedFunction(FunctionENUM function, double h)
 	}
     }
 
+void plotFunction(functionENUM function, unsigned int pointSize, float redColor, float greenColor, float blueColor)
+    {
+    }
+
+void drawRectangle(double x1, double y1, double x2, double y2)
+    {
+    }
+
+void demonstrateReimannUpperRectangles()
+    {
+    }
+
+
+
+
