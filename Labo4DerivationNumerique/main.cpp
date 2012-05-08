@@ -488,6 +488,16 @@ void demonstrateReimannUpperRectangles()
     {
     }
 
+void main(int choice)
+    {
+    }
+
+void menu(int choice)
+    {
+    }
+
+
+
 
 
 
