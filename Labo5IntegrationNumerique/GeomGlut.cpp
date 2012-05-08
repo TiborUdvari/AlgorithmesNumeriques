@@ -46,7 +46,7 @@ void GeomGlut::initGraphicsWin( unsigned int pixelWinX, double xMin, double xMax
   maxWin.x = xMax;
   maxWin.y = yMax;
 
-  glutCreateWindow("Algorithmes numériques: labo#4");
+  glutCreateWindow("Algorithmes numériques: labo#5");
 
   // Initialiser la couleur du fond (blanc)
   glClearColor(0.9f, 0.9f, 0.9f, 1.0f);

@@ -122,13 +122,13 @@ void mainFunction()
     cout << "Result with Middle Point method       : " << piMiddlePoint << endl;
     cout << "Result with Simpson                   : " << piSimpson << endl;
 
-    //plotPi();
+    plotPi();
 
     // Use fonctions, decomment for visual feedback
     // Please also decomment the setVisualisationLimitsForDemonstations in main()
     // when you wish to visualise any of the demonstration functions below
 
-    demonstrateMiddlePoint();
+    //demonstrateMiddlePoint();
     //demonstrateReimannUpperRectangles();
     //demonstrateReinmannLowerRectangles();
     //demonstrateSinFunctionWithReinmannUpper();
